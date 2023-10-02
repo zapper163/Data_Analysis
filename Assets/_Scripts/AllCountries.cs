@@ -5,177 +5,177 @@ using UnityEngine;
 public enum AllCountries
 {
 
-	Afghanistan,
-	Albania,
-	Algeria,
-	Andorra,
+	Afghanistan, 
+	Albania, //tirana
+	Algeria, //alger
+	Andorra, //andorra la vella
 	Angola,
 	AntiguaDeps,
-	Argentina,
-	Armenia,
-	Australia,
-	Austria,
+	Argentina, //buenos aires
+	Armenia, //ereban
+	Australia, //canberra
+	Austria, //viena
 	Azerbaijan,
 	Bahamas,
 	Bahrain,
 	Bangladesh,
 	Barbados,
-	Belarus,
-	Belgium,
+	Belarus, //minsk
+	Belgium, //brusels
 	Belize,
 	Benin,
 	Bhutan,
-	Bolivia,
-	Bosnia_Herzegovina,
+	Bolivia, //la paz
+	Bosnia_Herzegovina, //sarajevo
 	Botswana,
-	Brazil,
+	Brazil, //brazilia
 	Brunei,
-	Bulgaria,
-	Burkina,
+	Bulgaria, //sofia
+	Burkina, 
 	Burundi,
 	Cambodia,
 	Cameroon,
-	Canada,
+	Canada, //ottawa
 	Cape_Verde,
 	Central_African_Rep,
 	Chad,
-	Chile,
-	China,
-	Colombia,
+	Chile, //santiago
+	China, //pekin/beijing
+	Colombia, //bogota
 	Comoros,
 	Congo,
 	Congo_Democratic_Rep,
 	Costa_Rica,
-	Croatia,
-	Cuba,
-	Cyprus,
-	Czech_Republic,
-	Denmark,
+	Croatia, //zagreb
+	Cuba, //la habana
+	Cyprus, //nicosia
+	Czech_Republic, //prague
+	Denmark, //copenhaguen
 	Djibouti,
 	Dominica,
 	Dominican_Republic,
 	East_Timor,
-	Ecuador,
-	Egypt,
+	Ecuador, //quito
+	Egypt, //cairo
 	El_Salvador,
-	Equatorial_Guinea,
+	Equatorial_Guinea, //
 	Eritrea,
-	Estonia,
+	Estonia, //tallinn
 	Ethiopia,
 	Fiji,
 	Finland,
-	France,
+	France, //paris
 	Gabon,
 	Gambia,
-	Georgia,
-	Germany,
+	Georgia, //tblisi
+	Germany, //berlin
 	Ghana,
-	Greece,
+	Greece, //athens
 	Grenada,
-	Guatemala,
+	Guatemala, //guatemala
 	Guinea,
 	Guinea_Bissau,
 	Guyana,
 	Haiti,
 	Honduras,
-	Hungary,
-	Iceland,
-	India,
+	Hungary, //budapest
+	Iceland, //reykjavik
+	India, //new delhi
 	Indonesia,
 	Iran,
 	Iraq,
-	Ireland_Republic,
-	Israel,
-	Italy,
+	Ireland_Republic, //dublin
+	Israel, //jerusalem
+	Italy, //rome
 	Ivory_Coast,
-	Jamaica,
-	Japan,
+	Jamaica, //kingstone
+	Japan, //tokio
 	Jordan,
 	Kazakhstan,
 	Kenya,
 	Kiribati,
-	Korea_North,
-	Korea_South,
-	Kosovo,
+	Korea_North, //pyong yang
+	Korea_South, //seoul
+	Kosovo, //pristina
 	Kuwait,
 	Kyrgyzstan,
 	Laos,
-	Latvia,
+	Latvia, //riga
 	Lebanon,
 	Lesotho,
 	Liberia,
 	Libya,
-	Liechtenstein,
-	Lithuania,
-	Luxembourg,
-	Macedonia,
+	Liechtenstein, //vaduz
+	Lithuania, //vilnius
+	Luxembourg, //luxembourg
+	Macedonia, //skopje
 	Madagascar,
 	Malawi,
 	Malaysia,
 	Maldives,
 	Mali,
-	Malta,
+	Malta, //valletta
 	Marshall_Islands,
 	Mauritania,
 	Mauritius,
-	Mexico,
+	Mexico, //Mexico DC
 	Micronesia,
-	Moldova,
-	Monaco,
+	Moldova, //chisinaw
+	Monaco, //podgorica
 	Mongolia,
-	Montenegro,
-	Morocco,
+	Montenegro, //montenegro
+	Morocco, //rabat
 	Mozambique,
 	Myanmar_Burma,
 	Namibia,
 	Nauru,
 	Nepal,
-	Netherlands,
+	Netherlands, //amsterdam
 	New_Zealand,
 	Nicaragua,
 	Niger,
 	Nigeria,
-	Norway,
+	Norway, //oslo
 	Oman,
 	Pakistan,
 	Palau,
 	Panama,
 	Papua_New_Guinea,
-	Paraguay,
-	Peru,
+	Paraguay, //asuncion
+	Peru, //lima
 	Philippines,
-	Poland,
-	Portugal,
+	Poland, //warsaw
+	Portugal, //lisbon
 	Qatar,
-	Romania,
+	Romania, //bucharest
 	Russian_Federation,
 	Rwanda,
 	St_Kitts_Nevis,
 	St_Lucia,
 	Saint_Vincent_the_Grenadines,
 	Samoa,
-	San_Marino,
+	San_Marino, //san marino
 	Sao_Tome_Principe,
 	Saudi_Arabia,
-	Senegal,
-	Serbia,
+	Senegal, //dakar
+	Serbia, //belgrade
 	Seychelles,
 	Sierra_Leone,
 	Singapore,
-	Slovakia,
-	Slovenia,
+	Slovakia, //bratislava
+	Slovenia, //ljubljana
 	Solomon_Islands,
 	Somalia,
-	South_Africa,
+	South_Africa, //capetown
 	South_Sudan,
-	Spain,
+	Spain, //madrid
 	Sri_Lanka,
 	Sudan,
 	Suriname,
 	Swaziland,
-	Sweden,
-	Switzerland,
-	Syria,
+	Sweden, //stockholm
+	Switzerland, //berna
+	Syria, //damasc
 	Taiwan,
 	Tajikistan,
 	Tanzania,
@@ -184,19 +184,19 @@ public enum AllCountries
 	Tonga,
 	Trinidad_Tobago,
 	Tunisia,
-	Turkey,
+	Turkey, //ankara
 	Turkmenistan,
 	Tuvalu,
 	Uganda,
-	Ukraine,
+	Ukraine, //kyiv
 	United_Arab_Emirates,
-	United_Kingdom,
-	United_States,
-	Uruguay,
+	United_Kingdom, //london
+	United_States, //washington dc
+	Uruguay, //montevideo
 	Uzbekistan,
 	Vanuatu,
-	Vatican_City,
-	Venezuela,
+	Vatican_City, //vatican city
+	Venezuela, //caracas
 	Vietnam,
 	Yemen,
 	Zambia,
