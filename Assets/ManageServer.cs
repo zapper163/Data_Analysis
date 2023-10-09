@@ -46,7 +46,7 @@ public class ManageServer : MonoBehaviour
         form.AddField("country", country);
         form.AddField("date", dateTime.ToString());
 
-        UnityWebRequest www = UnityWebRequest.Post("https://www.my-server.com/myapi", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://citmalumnes.upc.es/~rubenaa3/Sim.php", form);
 
         yield return www.SendWebRequest();
 
