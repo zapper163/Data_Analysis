@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using static UnityEditor.Progress;
 
 public class ManageServer : MonoBehaviour
 {
@@ -16,6 +17,14 @@ public class ManageServer : MonoBehaviour
     private void OnDisable()
     {
         Simulator.OnNewPlayer -= ServerAddPlayer;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(UploadPurchase(DateTime.Now, 0));
+        }
     }
 
     void ServerAddPlayer(string name, string country, DateTime dateTime)
@@ -46,7 +55,7 @@ public class ManageServer : MonoBehaviour
         form.AddField("country", country);
         form.AddField("date", dateTime.ToString());
 
-        UnityWebRequest www = UnityWebRequest.Post("https://citmalumnes.upc.es/~rubenaa3/Sim.php", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://citmalumnes.upc.es/~rubenaa3/NewUserSim.php", form);
 
         yield return www.SendWebRequest();
 
@@ -61,12 +70,14 @@ public class ManageServer : MonoBehaviour
         }
 
         // server return user Id
+        if (www.downloadHandler.text == "nullData")
+        {
 
-        int tempUserID = -1;
-
-
-
-        SaveUserId(tempUserID);
+        }
+        else
+        {
+            SaveUserId(int.Parse(www.downloadHandler.text));
+        }
     }
 
     IEnumerator UpdateSession(DateTime dateTime)
@@ -93,10 +104,11 @@ public class ManageServer : MonoBehaviour
     {
         WWWForm form = new WWWForm();
         form.AddField("userId", userId);
-        form.AddField("date", dateTime.ToString());
-        form.AddField("itemId", itemId);
+        //form.AddField("date", dateTime.ToString());
+        //form.AddField("itemId", itemId);
+        form.AddField("money", 100);
 
-        UnityWebRequest www = UnityWebRequest.Post("https://www.my-server.com/myapi", form);
+        UnityWebRequest www = UnityWebRequest.Post("https://citmalumnes.upc.es/~rubenaa3/PurchaseSim.php", form);
 
         yield return www.SendWebRequest();
 
@@ -107,12 +119,14 @@ public class ManageServer : MonoBehaviour
         else
         {
             Debug.Log("Form upload complete!");
+            Debug.Log(www.downloadHandler.text);
+
         }
     }
 
     void SaveUserId(int userId)
     {
-        // save user id on txt
+        this.userId = userId;
     }
 
     int ReadUserId()
