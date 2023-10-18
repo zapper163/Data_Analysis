@@ -8,6 +8,7 @@ using static UnityEditor.Progress;
 public class ManageServer : MonoBehaviour
 {
     int userId;
+    int sessionId;
 
     private void OnEnable()
     {
@@ -23,7 +24,15 @@ public class ManageServer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            StartCoroutine(UploadPurchase(DateTime.Now, 0));
+            StartCoroutine(UploadPurchase(DateTime.Now, 4));
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(UpdateSession(DateTime.Now, true));
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            StartCoroutine(UpdateSession(DateTime.Now, false));
         }
     }
 
@@ -35,12 +44,12 @@ public class ManageServer : MonoBehaviour
     void ServerAddSession(DateTime dateTime)
     {
         userId = ReadUserId();
-        StartCoroutine(UpdateSession(dateTime));
+        StartCoroutine(UpdateSession(dateTime, true));
     }
 
     void ServerEndSession(DateTime dateTime)
     {
-        StartCoroutine(UpdateSession(dateTime));
+        StartCoroutine(UpdateSession(dateTime, false));
     }
 
     void ServerBuyItem(DateTime dateTime, int itemId)
@@ -80,13 +89,25 @@ public class ManageServer : MonoBehaviour
         }
     }
 
-    IEnumerator UpdateSession(DateTime dateTime)
+    IEnumerator UpdateSession(DateTime dateTime, bool startSession)
     {
-        WWWForm form = new WWWForm();
-        form.AddField("userId", userId);
-        form.AddField("date", dateTime.ToString());
+        string sessionId;
+        if (startSession)
+        {
+            userId = ReadUserId();
+            sessionId = "startSession";
+        }
+        else
+        {
+            sessionId = this.sessionId.ToString();
+        }
 
-        UnityWebRequest www = UnityWebRequest.Post("https://www.my-server.com/myapi", form);
+        WWWForm form = new WWWForm();
+        form.AddField("sessionId", sessionId);
+        form.AddField("userId", userId);
+        form.AddField("date", dateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+
+        UnityWebRequest www = UnityWebRequest.Post("https://citmalumnes.upc.es/~rubenaa3/SessionSim.php", form);
 
         yield return www.SendWebRequest();
 
@@ -97,6 +118,11 @@ public class ManageServer : MonoBehaviour
         else
         {
             Debug.Log("Form upload complete!");
+            Debug.Log(www.downloadHandler.text);
+            if (startSession)
+            {
+                SaveSessionId(int.Parse(www.downloadHandler.text));
+            }
         }
     }
 
@@ -104,9 +130,7 @@ public class ManageServer : MonoBehaviour
     {
         WWWForm form = new WWWForm();
         form.AddField("userId", userId);
-        //form.AddField("date", dateTime.ToString());
-        //form.AddField("itemId", itemId);
-        form.AddField("money", 100);
+        form.AddField("itemId", itemId);
 
         UnityWebRequest www = UnityWebRequest.Post("https://citmalumnes.upc.es/~rubenaa3/PurchaseSim.php", form);
 
@@ -120,7 +144,6 @@ public class ManageServer : MonoBehaviour
         {
             Debug.Log("Form upload complete!");
             Debug.Log(www.downloadHandler.text);
-
         }
     }
 
@@ -133,5 +156,11 @@ public class ManageServer : MonoBehaviour
     {
         // read form txt
         return 0;
+    }
+
+
+    void SaveSessionId(int sessionId)
+    {
+        this.sessionId = sessionId;
     }
 }
