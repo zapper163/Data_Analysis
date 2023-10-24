@@ -1,0 +1,7 @@
+item_id,game_id,description,price
+1,1,"Fistful of gems",0.99
+2,1,"Pouch of gems",4.99
+3,1,"Bucket of gems",9.99
+4,1,"Barrel of gems",19.99
+5,1,"Wagon of gems",49.99
+6,1,"Mountain of gems",99.99
