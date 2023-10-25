@@ -56,8 +56,6 @@ public class Simulator : MonoBehaviour
             Countries.Add(((AllCountries)rdm).ToString());
         }
         MakeOnePlayer();
-       
-     
     }
 
     void MakeOnePlayer()
@@ -201,7 +199,7 @@ public class Simulator : MonoBehaviour
             MakeOnePlayer();
     }
 
-   
+
     #endregion
 }
 

@@ -13,11 +13,17 @@ public class ManageServer : MonoBehaviour
     private void OnEnable()
     {
         Simulator.OnNewPlayer += ServerAddPlayer;
+        Simulator.OnNewSession += ServerAddSession;
+        Simulator.OnEndSession += ServerEndSession;
+        Simulator.OnBuyItem += ServerBuyItem;
     }
 
     private void OnDisable()
     {
         Simulator.OnNewPlayer -= ServerAddPlayer;
+        Simulator.OnNewSession -= ServerAddSession;
+        Simulator.OnEndSession -= ServerEndSession;
+        Simulator.OnBuyItem -= ServerBuyItem;
     }
 
     private void Update()
@@ -39,22 +45,26 @@ public class ManageServer : MonoBehaviour
     void ServerAddPlayer(string name, string country, DateTime dateTime)
     {
         StartCoroutine(UploadPlayer(name, country, dateTime));
+        CallbackEvents.OnAddPlayerCallback.Invoke(0);
     }
 
     void ServerAddSession(DateTime dateTime)
     {
         userId = ReadUserId();
         StartCoroutine(UpdateSession(dateTime, true));
+        CallbackEvents.OnNewSessionCallback.Invoke(0);
     }
 
     void ServerEndSession(DateTime dateTime)
     {
         StartCoroutine(UpdateSession(dateTime, false));
+        CallbackEvents.OnEndSessionCallback.Invoke(0);
     }
 
-    void ServerBuyItem(DateTime dateTime, int itemId)
+    void ServerBuyItem(int itemId, DateTime dateTime)
     {
         StartCoroutine(UploadPurchase(dateTime, itemId));
+        CallbackEvents.OnItemBuyCallback.Invoke();
     }
 
     IEnumerator UploadPlayer(string name, string country, DateTime dateTime)
@@ -150,12 +160,12 @@ public class ManageServer : MonoBehaviour
     void SaveUserId(int userId)
     {
         this.userId = userId;
+        PlayerPrefs.SetString("userID", userId.ToString());
     }
 
     int ReadUserId()
     {
-        // read form txt
-        return 0;
+        return int.Parse(PlayerPrefs.GetString("userID", "null"));
     }
 
 
