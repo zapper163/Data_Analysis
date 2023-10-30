@@ -7,8 +7,8 @@ using static UnityEditor.Progress;
 
 public class ManageServer : MonoBehaviour
 {
-    int userId;
-    int sessionId;
+    int userId = 0;
+    int sessionId = 0;
 
     private void OnEnable()
     {
@@ -50,7 +50,6 @@ public class ManageServer : MonoBehaviour
 
     void ServerAddSession(DateTime dateTime)
     {
-        userId = ReadUserId();
         StartCoroutine(UpdateSession(dateTime, true));
         CallbackEvents.OnNewSessionCallback.Invoke(0);
     }
@@ -70,9 +69,10 @@ public class ManageServer : MonoBehaviour
     IEnumerator UploadPlayer(string name, string country, DateTime dateTime)
     {
         WWWForm form = new WWWForm();
+        form.AddField("userId", ++userId);
         form.AddField("name", name);
         form.AddField("country", country);
-        form.AddField("date", dateTime.ToString());
+        form.AddField("date", dateTime.ToString("yyyy-MM-dd HH:mm:ss"));
 
         UnityWebRequest www = UnityWebRequest.Post("https://citmalumnes.upc.es/~rubenaa3/NewUserSim.php", form);
 
@@ -89,31 +89,34 @@ public class ManageServer : MonoBehaviour
         }
 
         // server return user Id
-        if (www.downloadHandler.text == "nullData")
+        if (www.downloadHandler.text == "nullData" || www.downloadHandler.text == "")
         {
 
         }
         else
         {
-            SaveUserId(int.Parse(www.downloadHandler.text));
+            //SaveUserId(int.Parse(www.downloadHandler.text));
         }
     }
 
     IEnumerator UpdateSession(DateTime dateTime, bool startSession)
     {
-        string sessionId;
+        int sId;
+        string start;
         if (startSession)
         {
-            userId = ReadUserId();
-            sessionId = "startSession";
+            sId = ++sessionId;
+            start = "true";
         }
         else
         {
-            sessionId = this.sessionId.ToString();
+            sId = sessionId;
+            start = "false";
         }
 
         WWWForm form = new WWWForm();
-        form.AddField("sessionId", sessionId);
+        form.AddField("start", start);
+        form.AddField("sessionId", sId);
         form.AddField("userId", userId);
         form.AddField("date", dateTime.ToString("yyyy-MM-dd HH:mm:ss"));
 
@@ -155,17 +158,6 @@ public class ManageServer : MonoBehaviour
             Debug.Log("Form upload complete!");
             Debug.Log(www.downloadHandler.text);
         }
-    }
-
-    void SaveUserId(int userId)
-    {
-        this.userId = userId;
-        PlayerPrefs.SetString("userID", userId.ToString());
-    }
-
-    int ReadUserId()
-    {
-        return int.Parse(PlayerPrefs.GetString("userID", "null"));
     }
 
 
