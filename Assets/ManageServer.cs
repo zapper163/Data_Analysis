@@ -45,25 +45,21 @@ public class ManageServer : MonoBehaviour
     void ServerAddPlayer(string name, string country, DateTime dateTime)
     {
         StartCoroutine(UploadPlayer(name, country, dateTime));
-        CallbackEvents.OnAddPlayerCallback.Invoke(0);
     }
 
     void ServerAddSession(DateTime dateTime)
     {
         StartCoroutine(UpdateSession(dateTime, true));
-        CallbackEvents.OnNewSessionCallback.Invoke(0);
     }
 
     void ServerEndSession(DateTime dateTime)
     {
         StartCoroutine(UpdateSession(dateTime, false));
-        CallbackEvents.OnEndSessionCallback.Invoke(0);
     }
 
     void ServerBuyItem(int itemId, DateTime dateTime)
     {
         StartCoroutine(UploadPurchase(dateTime, itemId));
-        CallbackEvents.OnItemBuyCallback.Invoke();
     }
 
     IEnumerator UploadPlayer(string name, string country, DateTime dateTime)
@@ -86,16 +82,7 @@ public class ManageServer : MonoBehaviour
         {
             Debug.Log(www.downloadHandler.text);
             Debug.Log("Form upload complete!");
-        }
-
-        // server return user Id
-        if (www.downloadHandler.text == "nullData" || www.downloadHandler.text == "")
-        {
-
-        }
-        else
-        {
-            //SaveUserId(int.Parse(www.downloadHandler.text));
+            CallbackEvents.OnAddPlayerCallback.Invoke(0);
         }
     }
 
@@ -134,7 +121,12 @@ public class ManageServer : MonoBehaviour
             Debug.Log(www.downloadHandler.text);
             if (startSession)
             {
-                SaveSessionId(int.Parse(www.downloadHandler.text));
+                //SaveSessionId(int.Parse(www.downloadHandler.text));
+                CallbackEvents.OnNewSessionCallback.Invoke(0);
+            }
+            else
+            {
+                CallbackEvents.OnEndSessionCallback.Invoke(0);
             }
         }
     }
@@ -157,6 +149,7 @@ public class ManageServer : MonoBehaviour
         {
             Debug.Log("Form upload complete!");
             Debug.Log(www.downloadHandler.text);
+            CallbackEvents.OnItemBuyCallback.Invoke();
         }
     }
 
